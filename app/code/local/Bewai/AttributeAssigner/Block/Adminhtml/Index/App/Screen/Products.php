@@ -21,7 +21,7 @@ class Bewai_AttributeAssigner_Block_Adminhtml_Index_App_Screen_Products extends 
         $this->_controller = 'admin';
         $this->setDefaultSort('sku');
         $this->setDefaultDir('asc');
-        $this->setUseAjax(true);
+        $this->setUseAjax(false);
         $this->setCanDisplayContainer(true);
         
     }
@@ -116,6 +116,6 @@ class Bewai_AttributeAssigner_Block_Adminhtml_Index_App_Screen_Products extends 
      * @return string
      */
     public function getGridUrl() {
-        return  $this->getUrl('*/*/ajaxFilterGrid', array('_current' => true));
+        return  $this->getUrl('*/*/index', array('_current' => true));
     }
 }
