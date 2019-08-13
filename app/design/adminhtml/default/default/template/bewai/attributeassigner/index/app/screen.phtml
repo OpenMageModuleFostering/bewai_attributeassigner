@@ -4,10 +4,11 @@ $products = $helper->getSelectedValue('products');
 ?>
 
 <?php if ($helper->getCurrentStep() == 'attribute') : ?>
-    <?php echo $this->getChildHtml('instructions'); ?>
-<?php endif; ?>
 
-<?php if ($helper->getCurrentStep() == 'products') : ?>
+    <?php echo $this->getChildHtml('instructions'); ?>
+
+<?php elseif ($helper->getCurrentStep() == 'products') : ?>
+
     <?php $grid = $this->getChild('products-grid'); ?>
     <?php echo $grid->toHtml(); ?>
     <div class="submit-products">
@@ -26,8 +27,7 @@ $products = $helper->getSelectedValue('products');
     <?php echo $grid->getMassactionBlock()->getJsObjectName(); ?>.checkCheckboxes();
     <?php endif; ?>
     </script>
-<?php endif; ?>
     
-<?php if ($helper->isReady()) : ?>
+<?php elseif ($helper->isReady()) : ?>
     <?php echo $this->getChildHtml('summary'); ?>
 <?php endif; ?>

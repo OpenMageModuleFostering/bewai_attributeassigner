@@ -35,7 +35,8 @@ class Bewai_AttributeAssigner_Block_Adminhtml_Index_App extends Bewai_AttributeA
     {
         return Mage::getResourceModel('catalog/product_attribute_collection')
                 ->addVisibleFilter()
-                ->addFieldToFilter('frontend_input', 'select');
+                ->addFieldToFilter('frontend_input', 'select')
+				->setOrder('frontend_label', 'ASC');
     }
     
     

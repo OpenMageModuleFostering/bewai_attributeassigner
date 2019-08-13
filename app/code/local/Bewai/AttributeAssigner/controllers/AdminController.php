@@ -134,7 +134,7 @@ class Bewai_AttributeAssigner_AdminController extends Mage_Adminhtml_Controller_
         $this->loadLayout('bewai_attributeassigner_admin_index');
         $this->getResponse()->setBody(
             $this->getLayout()
-                ->getBlock('bewai_attributeassigner_index_app_products')
+                ->getBlock('bewai_attributeassigner_index_app_screen_products')
                 ->toHtml());
     }
     
