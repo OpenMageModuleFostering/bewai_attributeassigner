@@ -1,0 +1,23 @@
+<div class="assigner-breadcrumb">
+    <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <?php $i = 1; foreach ($this->getSteps() as $key => $step) : ?>
+            <td class="step-number <?php echo $step['class']; ?>">
+                <?php if (strpos($step['class'], 'valid') !== false) : ?>
+                <a href="<?php echo $this->getUrl('*/*/index', array('step' => $key)); ?>">
+                <?php endif; ?>
+                    <span><?php echo $i; ?></span>
+                <?php if (strpos($step['class'], 'valid') !== false) : ?>
+                </a>
+                <?php endif; ?>
+            </td>
+            <td class="step-content <?php echo $step['class']; ?>">
+                <h4><?php echo $this->__($step['title']); ?></h4>
+                <?php if (isset($step['content'])) : ?>
+                    <?php echo $step['content']; ?>
+                <?php endif; ?>
+            </td>
+            <?php $i++; endforeach; ?>
+        </tr>
+    </table>
+</div>

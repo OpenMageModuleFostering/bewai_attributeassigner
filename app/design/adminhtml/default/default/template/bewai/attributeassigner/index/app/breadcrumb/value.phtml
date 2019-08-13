@@ -1,0 +1,16 @@
+<div class="attribute-selector">
+    <form action="<?php echo $this->getFormActionUrl(); ?>" method="post">
+        
+        <label for="value"><?php echo Mage::helper('adminhtml')->__('Value:'); ?></label>
+        <br />
+        
+        <select name="value" class="value-select">
+            <option value=""><?php echo $this->__('Select...'); ?></option>
+            <?php foreach ($this->getSelectedAttributeValuesList() as $value) : ?>
+                <option value="<?php echo $value->getId(); ?>"<?php if ($this->isValueSelected($value)) echo ' selected="selected"'; ?>><?php echo $value->getValue(); ?></option>
+            <?php endforeach; ?>
+        </select>
+        
+        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+    </form>
+</div>

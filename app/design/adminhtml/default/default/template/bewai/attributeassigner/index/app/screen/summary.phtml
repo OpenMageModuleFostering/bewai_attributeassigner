@@ -1,0 +1,81 @@
+<?php 
+$helper = Mage::helper('bewai_attributeassigner');
+$attribute = $helper->getSelectedValue('attribute');
+
+$products = $this->getProductsCollection()
+        ->addAttributeToSelect(array('sku', 'name', $attribute->getAttributeCode()));
+$products_show = 20;
+
+$join_products = $this->getTargetProductCollection()
+        ->addAttributeToSelect(array('sku', 'name'));
+
+$join_products_size = $join_products->getSize();
+$join_products_show = 10;
+?>
+<div class="assigner-summary">
+    <div class="left-col">
+        <h4><?php echo $this->__('These products:'); ?></h4>
+        <table width="100%" cellspacing="0" cellpadding="0" id="summary-product-list" class="summary-product-list no-more">
+            <thead>
+                <tr>
+                    <th><?php echo Mage::helper('catalog')->__('Sku'); ?></th>
+                    <th><?php echo Mage::helper('catalog')->__('Name'); ?></th>
+                    <th><?php echo $attribute->getFrontendLabel(); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php $i = 1; foreach ($products as $p) : ?>
+            <tr>
+                <td class="sku"><?php echo $p->getSku(); ?></td>
+                <td class="name"><?php echo $p->getName(); ?></td>
+                <td class="attr-value"><?php echo $p->getAttributeText($attribute->getAttributeCode()); ?></td>
+            </tr>
+            <?php $i++; if ($i > $products_show) break; endforeach; ?>
+            </tbody>
+        </table>
+        
+        <?php if ($products->getSize() > $products_show) : ?>
+        <a href="javascript:void(0)" onclick="$('summary-product-list').removeClassName('no-more');$(this).remove();" id="toggle-more-rows"><?php echo $this->__('%s others', $products->getSize() - $products_show); ?>...</a>
+        <br />
+        <?php endif; ?>
+        
+        <a href="<?php echo $this->getUrl('*/*/index', array('step' => 'products')); ?>"><?php echo Mage::helper('adminhtml')->__('Edit'); ?></a>
+    </div>
+    
+    <div class="right-col">
+        <h4><?php echo $this->__('will have their value for <strong>%s</strong> changed to <strong>%s</strong>.', $attribute->getFrontendLabel(), $this->getValue()->getValue()); ?></h4>
+        <form action="<?php echo $this->getUrl('*/*/confirm'); ?>" method="get" id="confirmForm">
+            <button class="scalable" title="<?php echo $this->__('Validate'); ?>" type="button" style="" onclick="if(confirm('<?php echo $this->__('Please confirm'); ?>')) $('confirmForm').submit();">
+                <span><span><span><?php echo $this->__('Validate'); ?></span></span></span>
+            </button>
+        </form>
+        
+        <div class="target-product-collection">
+            <h5><?php echo $this->__('%s product(s) already have that value:', $join_products_size); ?></h5>
+            <?php $join_products->getSelect()->limit($join_products_show); ?>
+            <table width="100%" cellspacing="0" cellpadding="0" class="summary-product-list">
+                <thead>
+                    <tr>
+                        <th><?php echo Mage::helper('catalog')->__('Sku'); ?></th>
+                        <th><?php echo Mage::helper('catalog')->__('Name'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($join_products as $p) : ?>
+                <tr>
+                    <td class="sku"><?php echo $p->getSku(); ?></td>
+                    <td class="name"><?php echo $p->getName(); ?></td>
+                </tr>
+                <?php endforeach; ?>
+                <?php if ($join_products_size > $join_products_show) : ?>
+                <tr>
+                    <td class="sku" colspan="2">...(<?php echo $this->__('%s others', $join_products_size - $join_products_show); ?>)</td>
+                </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="clear">&nbsp;</div>
+</div>

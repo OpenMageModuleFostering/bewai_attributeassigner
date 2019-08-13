@@ -1,0 +1,11 @@
+<?php 
+$helper = Mage::helper('bewai_attributeassigner');
+$products = $helper->getSelectedValue('products'); 
+?>
+<?php if ($products && is_array($products) && count($products) > 0) : ?>
+    <?php echo $this->__('%s products selected.', count($products)); ?>
+    <?php if ($helper->getCurrentStep() != 'products') : ?>
+    <br />
+    <a href="<?php echo $this->getUrl('*/*/index', array('step' => 'products')); ?>"><?php echo Mage::helper('adminhtml')->__('Edit'); ?></a>
+    <?php endif; ?>
+<?php endif; ?>

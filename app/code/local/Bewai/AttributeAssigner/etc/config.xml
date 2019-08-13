@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Bewai
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@bewai.fr so we can send you a copy immediately.
+ *
+ *
+ * @category    Bewai
+ * @package     Bewai_AttributeAssigner
+ * @copyright   Copyright (c) 2014 Bewai (http://www.bewai.fr)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    
+    <modules>
+        <Bewai_AttributeAssigner>
+            <version>0.1.0</version>
+        </Bewai_AttributeAssigner>
+    </modules>
+    
+    <global>        
+        <blocks>
+            <bewai_attributeassigner>
+                <class>Bewai_AttributeAssigner_Block</class>
+            </bewai_attributeassigner>
+        </blocks>        
+        <helpers>
+            <bewai_attributeassigner>
+                <class>Bewai_AttributeAssigner_Helper</class>
+            </bewai_attributeassigner>
+        </helpers>
+    </global>
+    
+    <admin>
+        <routers>
+            <bewai_attributeassigner>
+                <use>admin</use>
+                <args>
+                    <module>Bewai_AttributeAssigner</module>
+                    <frontName>bewai-attributeassigner</frontName>
+                </args>
+            </bewai_attributeassigner>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <bewai_attributeassigner>
+                    <file>bewai_attributeassigner.xml</file>
+                </bewai_attributeassigner>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <bewai_attributeassigner>
+                    <files>
+                        <default>Bewai_AttributeAssigner.csv</default>
+                    </files>
+                </bewai_attributeassigner>
+            </modules>
+        </translate>
+    </adminhtml>
+    
+</config> 

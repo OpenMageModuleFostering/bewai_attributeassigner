@@ -1,0 +1,16 @@
+<div class="attribute-selector">
+    <form action="<?php echo $this->getFormActionUrl(); ?>" method="post">
+        
+        <label for="attribute"><?php echo $this->__('Select an attribute:'); ?></label>
+        <br />
+
+        <select name="attribute" class="attribute-select">
+            <option value="select"><?php echo $this->__('Select...'); ?></option>
+            <?php foreach ($this->getAttributeList() as $attr) : ?>
+                <option value="<?php echo $attr->getId(); ?>"<?php if ($this->isAttributeSelected($attr)) echo ' selected="selected"'; ?>><?php echo $attr->getFrontendLabel(); ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+    </form>
+</div>

@@ -1,0 +1,85 @@
+<script>
+    
+var Bewai = Bewai || {};    
+
+Bewai.AttributeAssigner = Class.create({
+    
+    selectors: {
+        attributeSelect: '.attribute-select',
+        valueSelect:     '.value-select'
+    },
+    
+    initialize: function(appContainer) {
+        this.appContainer = $(appContainer);
+        this.reactiveSelects = {
+            attributeSelector: this.appContainer.down(this.selectors.attributeSelect),
+            valueSelector:     this.appContainer.down(this.selectors.valueSelect)
+        };
+        
+        this.addEventListeners();
+        this.doLayoutUpdates();
+    },
+    
+    clearEventListeners: function() {
+        var k;
+        for (k in this.reactiveSelects) {
+            if (this.reactiveSelects.hasOwnProperty(k) && this.reactiveSelects[k]) {
+                this.reactiveSelects[k].stopObserving('change');
+            }
+        }
+        return this;
+    },
+    
+    addEventListeners: function() {
+        var k, that = this;
+        for (k in this.reactiveSelects) {
+            if (this.reactiveSelects.hasOwnProperty(k) && this.reactiveSelects[k]) {
+                this.reactiveSelects[k]
+                    .stopObserving('change')
+                    .observe('change', function(e){
+                        var form = $(this).up('form');
+                        form.submit();
+                        Event.stop(e);
+
+//                        form.request({
+//                            onComplete: function(data){
+//                                that.clearEventListeners();
+//                                that.appContainer.update(data.responseText);
+//                            }
+//                        });
+                    });
+            }
+        }   
+    },
+    
+    doLayoutUpdates: function() {
+        this.appContainer.select('select').each(function(elt){
+            var options = elt.select('option');
+            if (options.length === 1 || (options.length === 2 && options[0].getAttribute('value') == '')) {
+                options[(options.length === 2 && options[0].getAttribute('value') == '') ? 1 : 0].setAttribute('selected', 'selected');
+            }
+        });
+        
+        // Fix checkbox checked="checked" attribute defined for massaction
+        // so checked alone works better and we do not have to rewrite 
+//        this.appContainer.select('input[type="checkbox"]').each(function(elt){
+//            if (elt.getAttribute('checked') === 'checked') {
+//                elt.removeAttribute('checked');
+//                elt.checked = true;
+//            } 
+//        });
+    },
+    
+    destroy: function() {
+        this.clearEventListeners();
+        return this;
+    }
+    
+});
+
+if (bewai_attribute_assigner)
+    delete(bewai_attribute_assigner.destroy());
+
+var bewai_attribute_assigner = new Bewai.AttributeAssigner('app-container');
+
+</script>
