@@ -156,8 +156,9 @@ class Bewai_AttributeAssigner_Helper_Data extends Mage_Core_Helper_Abstract
                 ->setPositionOrder('desc', true)
                 ->load();
         foreach ($attr as $value) {
-            $arr[$value->getId()] = $value->getValue();
+            $arr[(string)$value->getId()] = $value->getValue();
         }
+        asort($arr);
         return $arr;
     }
     

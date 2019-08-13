@@ -48,10 +48,20 @@ class Bewai_AttributeAssigner_Block_Adminhtml_Index_App extends Bewai_AttributeA
     {
         if (!$this->getAttribute()) return array();
         
-        return Mage::getResourceModel('eav/entity_attribute_option_collection')
+        $arr = Mage::getResourceModel('eav/entity_attribute_option_collection')
                 ->setAttributeFilter($this->getAttribute()->getId())
                 ->setPositionOrder('desc', true)
                 ->load();
+        
+        $rtn = array();
+        
+        foreach ($arr as $value) {
+            $rtn[$value->getValue()] = $value;
+        }
+        
+        ksort($rtn);
+        
+        return $rtn;
     }
     
     /**

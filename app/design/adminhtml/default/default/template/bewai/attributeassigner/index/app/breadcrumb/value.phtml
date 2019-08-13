@@ -4,7 +4,7 @@
         <label for="value"><?php echo Mage::helper('adminhtml')->__('Value:'); ?></label>
         <br />
         
-        <select name="value" class="value-select">
+        <select name="value" class="value-select"<?php if ($this->_helper()->getCurrentStep() !== 'value') echo ' disabled="disabled"'; ?>>
             <option value=""><?php echo $this->__('Select...'); ?></option>
             <?php foreach ($this->getSelectedAttributeValuesList() as $value) : ?>
                 <option value="<?php echo $value->getId(); ?>"<?php if ($this->isValueSelected($value)) echo ' selected="selected"'; ?>><?php echo $value->getValue(); ?></option>
