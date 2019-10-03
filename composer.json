@@ -1,7 +1,7 @@
 {
-    "name": "OpenMageModuleFostering\/Bewai_AttributeAssigner",
+    "name": "openmage-module-fostering\/bewai_attributeassigner",
     "type": "magento-module",
-    "license": "Open-Software-License-(OSL)",
+    "license": "OSL-3.0",
     "homepage": "",
     "description": "This extension changes the option value of a selected attribute for multiple products at a time.",
     "authors": [
