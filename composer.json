@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/Bewai_AttributeAssigner",
+    "name": "OpenMageModuleFostering\/Bewai_AttributeAssigner",
     "type": "magento-module",
     "license": "Open-Software-License-(OSL)",
     "homepage": "",
     "description": "This extension changes the option value of a selected attribute for multiple products at a time.",
     "authors": [
-    {
-        "name": "Benjamin Yayon",
-        "email": "benjamin.yayon@bewai.fr"
-    }
-],
+        {
+            "name": "Benjamin Yayon",
+            "email": "benjamin.yayon@bewai.fr"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
